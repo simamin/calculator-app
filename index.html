@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>calculator app</title>
+        <link rel ="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div class = "calculator">
+            <div class = "display">
+                <div class="workingDisplay"></div>
+                0
+            </div>
+            <div class="row">
+                <button class = "clearBtn">clear</button>
+                <button class = "backBtn"> <= </button>
+                <button class = "divide operatorBtn">/</button>
+            </div>
+            <div class="row">
+                <button class="numberBtn">7</button>
+                <button class="numberBtn">8</button>
+                <button class="numberBtn">9</button>
+                <button class = "multiply operatorBtn">x</button>
+            </div>
+            <div class="row">
+                <button class="numberBtn">4</button>
+                <button class="numberBtn">5</button>
+                <button class="numberBtn">6</button>
+                <button class = "subtract operatorBtn">-</button>
+            </div>
+            <div class="row">
+                <button class="numberBtn">1</button>
+                <button class="numberBtn">2</button>
+                <button class="numberBtn">3</button>
+                <button class = "add operatorBtn">+</button>
+            </div>
+            <div class="row">
+                <button class="numberBtn">0</button>
+                <button class="numberBtn">.</button>
+                <button class="resultBtn">=</button>
+            </div>
+        </div>
+
+        <script>
+
+            let firstNumber;
+            let secondNumber;
+            let operator;
+
+            function add(a, b){
+                return a + b;
+            }
+
+            function subtract(a, b){
+                return a - b;
+            }
+
+            function multiply(a, b){
+                return a * b;
+            }
+
+            function divide(a, b){
+                return a / b;
+            }
+
+            function operate(firstNumber, secondNumber, operator){
+                if (operator === 'add'){
+                    return add(firstNumber, secondNumber);
+                }
+                if (operator === 'subtract'){
+                    return subtract(firstNumber, secondNumber);
+                }
+                if (operator === 'multiply'){
+                    return multiply(firstNumber, secondNumber);
+                }
+                if (operator === 'divide'){
+                    return divide(firstNumber, secondNumber);
+                }
+            }
+
+        </script>
+    </body>
+</html>
