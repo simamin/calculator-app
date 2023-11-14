@@ -14,42 +14,65 @@ body{
 
 .calculator{
     margin: 50px auto;
-    width: 350px;
+    width: 325px;
     display: flex;
     flex-direction: column;
     gap: 5px;
     background-color: #1f1920;
     border-radius: 10px;
-    padding: 15px;
 }
 
 .row{
     display: flex;
     justify-content: space-between;
-    gap: 5px;
-    width: 100%
+    gap: 0px;
+    width: 100%;
 }
 
 .display-wrapper{
     width: 100%;
     border-radius: 10px;
-    background-color: #362937;
     margin-bottom: 5px;
 }
 
 .working{
+    font-size: 1.5em;
     text-align: right;
-    padding: 5px 10px;
+    padding: 10px;
     height: 40px;
-    color: #ccc;
+    color: #7f94a8;
+    background-color: #362937;
+    border-radius: 10px 10px 0px 0px;
 }
 
 .display{
     padding: 15px 10px;
-    font-size: 1.5em;
+    font-size: 2em;
     height: 60px;
     color: #ccc;
     text-align: right;
+    background-color: #362937;
+}
+
+.divider{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 320px 0 0;
+    border-color: #362937 transparent transparent transparent;
+}
+
+.button-wrapper{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button-grid{
+    background: #e7523f;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
 }
 
 .topRow{
@@ -89,6 +112,7 @@ body{
     background-color: #27262e;
     color: #e7523f;
     flex-basis: 25%;
+    font-size: 1.5em;
 }
 
 button{
@@ -99,6 +123,8 @@ button{
     border: 0;
     border-radius: 5px;
     transition: ease-out 0.1s;
+    border: 0px solid #1f1920;
+    box-shadow: 0px 0px 2px #1f1920;
 }
 
 button:active{
