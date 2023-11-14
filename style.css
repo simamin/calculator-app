@@ -42,15 +42,6 @@ body{
     margin-bottom: 5px;
 }
 
-.workingDisplay{
-    height: 40%;
-}
-
-.result{
-    padding: 10px 0px;
-    height: 60%;
-}
-
 .topRow{
     display: flex;
     justify-content: flex-end;

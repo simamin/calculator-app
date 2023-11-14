@@ -9,69 +9,97 @@
     <body>
 
         <div class = "calculator">
-            <div class = "display">
-                <div class="workingDisplay"></div>
-                <div class = "result">0</div>
-            </div>
+            <div class = "display">0</div>
             <div class="topRow">
                 <button class = "backBtn"> <i class="fa-solid fa-delete-left"></i> </button>
             </div>
             <div class="row">
                 <button class = "clearBtn">C</button>
-                <button class = "divide operatorBtn">/</button>
+                <button class = "operatorBtn" data-action = "divide">/</button>
             </div>
             <div class="row">
                 <button class="numberBtn">7</button>
                 <button class="numberBtn">8</button>
                 <button class="numberBtn">9</button>
-                <button class = "multiply operatorBtn">x</button>
+                <button class = "operatorBtn" data-action = "multiply">x</button>
             </div>
             <div class="row">
                 <button class="numberBtn">4</button>
                 <button class="numberBtn">5</button>
                 <button class="numberBtn">6</button>
-                <button class = "subtract operatorBtn">-</button>
+                <button class = "operatorBtn" data-action = "subtract">-</button>
             </div>
             <div class="row">
                 <button class="numberBtn">1</button>
                 <button class="numberBtn">2</button>
                 <button class="numberBtn">3</button>
-                <button class = "add operatorBtn">+</button>
+                <button class = "operatorBtn" data-action = "add">+</button>
             </div>
             <div class="row">
                 <button class="numberBtn">0</button>
-                <button class="numberBtn">.</button>
+                <!-- <button class="numberBtn">.</button> -->
                 <button class="resultBtn">=</button>
             </div>
         </div>
 
         <script>
 
-            let firstNumber;
-            let secondNumber;
-            let operator;
+            let result = 0;
+            let firstNumber = 0;
+            let secondNumber = 0;
+            let currentOperator;
+            let lastBtnPressed;
 
-            let displayValue = 0;
+            let memory = [];
 
-            const display = document.querySelector('.workingDisplay');
+
+            const display = document.querySelector('.display');
             const buttons = document.querySelectorAll('button');
 
             
             const populateDisplay = function populateDisplay(){
-                console.log(this);
+                console.log(memory);
                 if (this.classList.contains('clearBtn')){
-                    display.textContent = '';   
+                    display.textContent = '0';  
+                    memory = []; 
+                    return
                 }
-                else {
-                }   display.textContent = `${this.textContent}`;
-            }
-
-            function operate(){
+                else if (this.classList.contains('numberBtn')){
+                        if (lastBtnPressed === 'operatorBtn'){
+                            display.textContent = '';
+                        }
+                        if (display.textContent === '0'){
+                            display.textContent = `${this.textContent}`;
+                        }
+                        else {
+                            if (display.textContent.length <= 21){
+                                display.textContent += this.textContent;
+                            }                     
+                        }
+                        firstNumber = display.textContent;
+                        secondNumber = display.textContent;
+                     }
+                else if (this.classList.contains('operatorBtn')){
+                    memory.push(firstNumber);
+                    currentOperator = `${this.dataset.action}`;
+                    memory.push(currentOperator);
+                }
+                else if (this.classList.contains('resultBtn')){
+                    if (lastBtnPressed === 'resultBtn'){
+                        return
+                    }
+                    memory.push(secondNumber);
+                    result = operate(memory[0], memory[1], memory[2]);
+                    memory.push(result);
+                    display.textContent = result;
+                }
+                memory.splice(-0, memory.length - 4);
+                lastBtnPressed = this.className;
 
             }
 
             function add(a, b){
-                return a + b;
+                return parseInt(a) + parseInt(b);
             }
 
             function subtract(a, b){
@@ -86,7 +114,8 @@
                 return a / b;
             }
 
-            function operate(firstNumber, secondNumber, operator){
+            function operate(firstNumber, operator, secondNumber){
+
                 if (operator === 'add'){
                     return add(firstNumber, secondNumber);
                 }
