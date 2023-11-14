@@ -6,9 +6,8 @@ A basic calculator app.
 
 ### future features
 
-- percentage button
-- functioning delete button
-- improve UI to match design
+- add percentage button logic
+- improve UI to match design e.g. add gradient on buttons, colour co-ordinate working display
 
 
 ### contact
