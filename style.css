@@ -3,13 +3,13 @@
 *{
     box-sizing: border-box;
     border: 0px red solid;
+    font-family: "Montserrat", Helvetica, sans-serif;
 }
 
 body{
     background-image: linear-gradient(-225deg, #4e65a9 0%, #5e5adc 48%, #7285ff 100%);
     height: 100vh;
     overflow-y: hidden;
-    font-family: "Montserrat", Helvetica, sans-serif;
 }
 
 .calculator{

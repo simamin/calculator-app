@@ -63,11 +63,11 @@
 
             
             const populateDisplay = function populateDisplay(){
-                console.log(memory);
                 if (this.classList.contains('clearBtn')){
                     display.textContent = '0'; 
                     workingDisplay.textContent = '';
-                    memory = []; 
+                    memory = [];
+                    firstNumber = 0; 
                     return
                 }
                 else if (this.classList.contains('numberBtn')){
@@ -78,7 +78,7 @@
                             display.textContent = `${this.textContent}`;
                         }
                         else {
-                            if (display.textContent.length <= 21){
+                            if (display.textContent.length <= 19){
                                 display.textContent += this.textContent;
                             }                     
                         }
@@ -86,6 +86,9 @@
                         secondNumber = display.textContent;
                      }
                 else if (this.classList.contains('operatorBtn')){
+                    if (lastBtnPressed === 'operatorBtn'){
+                        return
+                    }
                     memory.push(firstNumber);
                     currentOperator = `${this.dataset.action}`;
                     memory.push(currentOperator);
@@ -95,13 +98,15 @@
                         return
                     }
                     memory.push(secondNumber);
+                    memory.splice(-0, memory.length - 3);
                     result = operate(memory[0], memory[1], memory[2]);
-                    memory.push(result);
-                    display.textContent = result;
+                    display.textContent = `= ${result}`;
+                    firstNumber = `${result}`;
+                    workingDisplay.textContent = memory.join(' ')
                 }
-                memory.splice(-0, memory.length - 4);
+                console.log(memory);
+                memory.splice(-0, memory.length - 3);
                 lastBtnPressed = this.className;
-                workingDisplay.textContent = memory.join(' ');
 
             }
 
