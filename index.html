@@ -79,10 +79,11 @@
                             display.textContent = `${this.textContent}`;
                         }
                         else {
-                            if (this.textContent === '.' && !display.textContent.includes('.')){
+                            if (this.textContent === '.' && display.textContent.includes('.') === false){
                                     display.textContent+= '.';
+                                    console.log('hi');
                                 }
-                            else if (display.textContent.length <= 19){
+                            else if (display.textContent.length <= 19 && this.textContent !== '.'){
                                 display.textContent += this.textContent;
                             }                     
                         }
