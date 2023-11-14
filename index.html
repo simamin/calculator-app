@@ -9,31 +9,34 @@
     <body>
 
         <div class = "calculator">
-            <div class = "display">0</div>
+            <div class="display-wrapper">
+                <div class="working"></div>
+                <div class = "display">0</div>
+            </div>
             <div class="topRow">
                 <button class = "backBtn"> <i class="fa-solid fa-delete-left"></i> </button>
             </div>
             <div class="row">
                 <button class = "clearBtn">C</button>
-                <button class = "operatorBtn" data-action = "divide">/</button>
+                <button class = "operatorBtn" data-action = "÷">/</button>
             </div>
             <div class="row">
                 <button class="numberBtn">7</button>
                 <button class="numberBtn">8</button>
                 <button class="numberBtn">9</button>
-                <button class = "operatorBtn" data-action = "multiply">x</button>
+                <button class = "operatorBtn" data-action = "x">x</button>
             </div>
             <div class="row">
                 <button class="numberBtn">4</button>
                 <button class="numberBtn">5</button>
                 <button class="numberBtn">6</button>
-                <button class = "operatorBtn" data-action = "subtract">-</button>
+                <button class = "operatorBtn" data-action = "-">-</button>
             </div>
             <div class="row">
                 <button class="numberBtn">1</button>
                 <button class="numberBtn">2</button>
                 <button class="numberBtn">3</button>
-                <button class = "operatorBtn" data-action = "add">+</button>
+                <button class = "operatorBtn" data-action = "+">+</button>
             </div>
             <div class="row">
                 <button class="numberBtn">0</button>
@@ -54,18 +57,21 @@
 
 
             const display = document.querySelector('.display');
+            const workingDisplay = document.querySelector('.working');
+
             const buttons = document.querySelectorAll('button');
 
             
             const populateDisplay = function populateDisplay(){
                 console.log(memory);
                 if (this.classList.contains('clearBtn')){
-                    display.textContent = '0';  
+                    display.textContent = '0'; 
+                    workingDisplay.textContent = '';
                     memory = []; 
                     return
                 }
                 else if (this.classList.contains('numberBtn')){
-                        if (lastBtnPressed === 'operatorBtn'){
+                        if (lastBtnPressed === 'operatorBtn' || lastBtnPressed === 'resultBtn'){
                             display.textContent = '';
                         }
                         if (display.textContent === '0'){
@@ -95,6 +101,7 @@
                 }
                 memory.splice(-0, memory.length - 4);
                 lastBtnPressed = this.className;
+                workingDisplay.textContent = memory.join(' ');
 
             }
 
@@ -116,16 +123,16 @@
 
             function operate(firstNumber, operator, secondNumber){
 
-                if (operator === 'add'){
+                if (operator === '+'){
                     return add(firstNumber, secondNumber);
                 }
-                if (operator === 'subtract'){
+                if (operator === '-'){
                     return subtract(firstNumber, secondNumber);
                 }
-                if (operator === 'multiply'){
+                if (operator === 'x'){
                     return multiply(firstNumber, secondNumber);
                 }
-                if (operator === 'divide'){
+                if (operator === '÷'){
                     return divide(firstNumber, secondNumber);
                 }
             }
