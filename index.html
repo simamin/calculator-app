@@ -4,17 +4,20 @@
         <meta charset = "UTF-8">
         <title>calculator app</title>
         <link rel ="stylesheet" href="style.css">
+        <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     </head>
     <body>
 
         <div class = "calculator">
             <div class = "display">
                 <div class="workingDisplay"></div>
-                0
+                <div class = "result">0</div>
+            </div>
+            <div class="topRow">
+                <button class = "backBtn"> <i class="fa-solid fa-delete-left"></i> </button>
             </div>
             <div class="row">
-                <button class = "clearBtn">clear</button>
-                <button class = "backBtn"> <= </button>
+                <button class = "clearBtn">C</button>
                 <button class = "divide operatorBtn">/</button>
             </div>
             <div class="row">
@@ -48,6 +51,25 @@
             let secondNumber;
             let operator;
 
+            let displayValue = 0;
+
+            const display = document.querySelector('.workingDisplay');
+            const buttons = document.querySelectorAll('button');
+
+            
+            const populateDisplay = function populateDisplay(){
+                console.log(this);
+                if (this.classList.contains('clearBtn')){
+                    display.textContent = '';   
+                }
+                else {
+                }   display.textContent = `${this.textContent}`;
+            }
+
+            function operate(){
+
+            }
+
             function add(a, b){
                 return a + b;
             }
@@ -79,6 +101,7 @@
                 }
             }
 
+            buttons.forEach((button) => button.addEventListener('click', populateDisplay));
         </script>
     </body>
 </html>

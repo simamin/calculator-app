@@ -1,11 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
 *{
     box-sizing: border-box;
     border: 0px red solid;
 }
 
 body{
-    background: #393535;
-    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(-225deg, #4e65a9 0%, #5e5adc 48%, #7285ff 100%);
+    height: 100vh;
+    overflow-y: hidden;
+    font-family: "Montserrat", Helvetica, sans-serif;
 }
 
 .calculator{
@@ -13,23 +17,25 @@ body{
     width: 350px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    background: #2a2a2a;
-    border-radius: 15px;
-    padding: 10px;
+    gap: 5px;
+    background-color: #1f1920;
+    border-radius: 10px;
+    padding: 15px;
 }
 
 .row{
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 5px;
     width: 100%
 }
 
 .display{
     font-size: 1.5em;
     width: 100%;
-    background-color: rgb(138, 185, 125);
+    height: 100px;
+    background-color: #362937;
+    color: #ccc;
     border-radius: 10px;
     padding: 5px 10px;
     text-align: right;
@@ -37,10 +43,31 @@ body{
 }
 
 .workingDisplay{
-    height: 20px;
+    height: 40%;
 }
 
-.numberBtn, .operatorBtn, .backBtn{
+.result{
+    padding: 10px 0px;
+    height: 60%;
+}
+
+.topRow{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    width: 100%
+}
+
+.backBtn {
+    flex-basis: 25%;
+    text-align: right;
+    background-color: none;
+    height: 40px;
+    background-color: inherit;
+    padding: 5px 15px;
+}
+
+.numberBtn, .operatorBtn{
     flex: 1;
     flex-basis: 25%;
 }
@@ -48,16 +75,21 @@ body{
 .clearBtn, .resultBtn{
     flex:2;
     flex-basis: 50%;
+    background-color: #7f94a8;
+    color: #1e181f;
 }
 
 .operatorBtn{
-    background-color: #bd2a2a;
+    background-color: #27262e;
+    color: #e7523f;
     flex-basis: 25%;
 }
 
 button{
+    color: #7f94a8;
+    background-color: #342836;
     font-size: 1.5em;
-    height: 50px;
+    height: 70px;
     border: 0;
-    border-radius: 15px;
+    border-radius: 5px;
 }
