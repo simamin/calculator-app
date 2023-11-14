@@ -64,6 +64,7 @@
 
             
             const populateDisplay = function populateDisplay(){
+
                 if (this.classList.contains('clearBtn')){
                     display.textContent = '0'; 
                     workingDisplay.textContent = '';
@@ -71,17 +72,23 @@
                     firstNumber = 0; 
                     return
                 }
+
+                if(this.classList.contains('backBtn') && display.textContent.includes('=') === false){
+                    let deletedDisplay = display.textContent.slice(0, display.textContent.length - 1);
+                    display.textContent = deletedDisplay;
+                    firstNumber = display.textContent;
+                    secondNumber = display.textContent;
+                }
                 else if (this.classList.contains('numberBtn')){
                         if (lastBtnPressed === 'operatorBtn' || lastBtnPressed === 'resultBtn'){
-                            display.textContent = '';
+                            display.textContent = '0';
                         }
-                        if (display.textContent === '0' && this.textContent !== '.'){
+                        if (display.textContent === '0' && this.textContent !== '.' || display.textContent.includes('=') === true){
                             display.textContent = `${this.textContent}`;
                         }
                         else {
                             if (this.textContent === '.' && display.textContent.includes('.') === false){
                                     display.textContent+= '.';
-                                    console.log('hi');
                                 }
                             else if (display.textContent.length <= 19 && this.textContent !== '.'){
                                 display.textContent += this.textContent;
@@ -104,6 +111,14 @@
                     }
                     memory.push(secondNumber);
                     memory.splice(-0, memory.length - 3);
+
+                    for (let i = 0; i<memory.length; i++){
+                        if (memory[i][memory[i].length - 1] === '.'){
+                            let trimmedString = memory[i].replace('.', '');
+                            memory[i] = trimmedString; // removes decimal if it is the last character in either number
+                        }
+                    }
+
                     if (memory[1] === 'x' || memory[1] === '÷' || memory[1] === '+' || memory[1] === '-'){
                         result = operate(memory[0], memory[1], memory[2]);
                     display.textContent = `= ${result}`;
