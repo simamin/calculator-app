@@ -17,7 +17,7 @@
                 <button class = "backBtn"> <i class="fa-solid fa-delete-left"></i> </button>
             </div>
             <div class="row">
-                <button class = "clearBtn">C</button>
+                <button class = "clearBtn">AC</button>
                 <button class = "operatorBtn" data-action = "÷">/</button>
             </div>
             <div class="row">
@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <button class="numberBtn">0</button>
-                <!-- <button class="numberBtn">.</button> -->
+                <button class="numberBtn">.</button>
                 <button class="resultBtn">=</button>
             </div>
         </div>
@@ -55,6 +55,7 @@
 
             let memory = [];
 
+            const regex = /÷x-+/g
 
             const display = document.querySelector('.display');
             const workingDisplay = document.querySelector('.working');
@@ -74,11 +75,14 @@
                         if (lastBtnPressed === 'operatorBtn' || lastBtnPressed === 'resultBtn'){
                             display.textContent = '';
                         }
-                        if (display.textContent === '0'){
+                        if (display.textContent === '0' && this.textContent !== '.'){
                             display.textContent = `${this.textContent}`;
                         }
                         else {
-                            if (display.textContent.length <= 19){
+                            if (this.textContent === '.' && !display.textContent.includes('.')){
+                                    display.textContent+= '.';
+                                }
+                            else if (display.textContent.length <= 19){
                                 display.textContent += this.textContent;
                             }                     
                         }
@@ -99,12 +103,13 @@
                     }
                     memory.push(secondNumber);
                     memory.splice(-0, memory.length - 3);
-                    result = operate(memory[0], memory[1], memory[2]);
+                    if (memory[1] === 'x' || memory[1] === '÷' || memory[1] === '+' || memory[1] === '-'){
+                        result = operate(memory[0], memory[1], memory[2]);
                     display.textContent = `= ${result}`;
                     firstNumber = `${result}`;
                     workingDisplay.textContent = memory.join(' ')
+                    }
                 }
-                console.log(memory);
                 memory.splice(-0, memory.length - 3);
                 lastBtnPressed = this.className;
 

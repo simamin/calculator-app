@@ -2,6 +2,15 @@
 
 A basic calculator app.
 
+- View project [here](https://noepse.github.io/calculator-app)
+
+### future features
+
+- percentage button
+- functioning delete button
+- improve UI to match design
+
+
 ### contact
 
 Feel free to reach out via any of the routes below.

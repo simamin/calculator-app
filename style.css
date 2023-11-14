@@ -68,6 +68,11 @@ body{
     padding: 5px 15px;
 }
 
+.backBtn:active{
+    color: #7a647e;
+    background-color: inherit;
+}
+
 .numberBtn, .operatorBtn{
     flex: 1;
     flex-basis: 25%;
@@ -93,4 +98,9 @@ button{
     height: 70px;
     border: 0;
     border-radius: 5px;
+    transition: ease-out 0.1s;
+}
+
+button:active{
+    background-color: #7a647e;
 }
