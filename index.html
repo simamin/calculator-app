@@ -21,7 +21,7 @@
                 <div class="button-grid">
                     <div class="row">
                         <button class = "clearBtn">AC</button>
-                        <button class = "operatorBtn">%</button>
+                        <button class = "operatorBtn" data-action = "%">%</button>
                         <button class = "operatorBtn" data-action = "÷">÷</button>
                     </div>
                     <div class="row">
@@ -61,8 +61,6 @@
 
             let memory = [];
 
-            const regex = /÷x-+/g
-
             const display = document.querySelector('.display');
             const workingDisplay = document.querySelector('.working');
 
@@ -96,7 +94,7 @@
                             if (this.textContent === '.' && display.textContent.includes('.') === false){
                                     display.textContent+= '.';
                                 }
-                            else if (display.textContent.length <= 19 && this.textContent !== '.'){
+                            else if (display.textContent.length <= 11 && this.textContent !== '.'){
                                 display.textContent += this.textContent;
                             }                     
                         }
@@ -110,6 +108,13 @@
                     memory.push(firstNumber);
                     currentOperator = `${this.dataset.action}`;
                     memory.push(currentOperator);
+                    if (currentOperator === '%'){
+                        lastBtnPressed === 'percentageBtn';
+                        firstNumber = percentage(firstNumber);
+                        memory.push(firstNumber);
+                        display.textContent = `${firstNumber}`;
+                        return;
+                    }
                 }
                 else if (this.classList.contains('resultBtn')){
                     if (lastBtnPressed === 'resultBtn'){
@@ -127,9 +132,12 @@
 
                     if (memory[1] === 'x' || memory[1] === '÷' || memory[1] === '+' || memory[1] === '-'){
                         result = operate(memory[0], memory[1], memory[2]);
-                    display.textContent = `= ${result}`;
-                    firstNumber = `${result}`;
-                    workingDisplay.textContent = memory.join(' ')
+                        if (isNaN(result) && result !== '🤨'){
+                            result = 'Error';
+                        }
+                        display.textContent = `= ${result}`;
+                        firstNumber = `${result}`;
+                        workingDisplay.textContent = memory.join(' ')
                     }
                 }
                 memory.splice(-0, memory.length - 3);
@@ -138,7 +146,7 @@
             }
 
             function add(a, b){
-                return parseInt(a) + parseInt(b);
+                return parseFloat(a) + parseFloat(b);
             }
 
             function subtract(a, b){
@@ -153,6 +161,10 @@
                 return a / b;
             }
 
+            function percentage(a){
+                return a/100;
+            }
+
             function operate(firstNumber, operator, secondNumber){
 
                 if (operator === '+'){
@@ -165,6 +177,9 @@
                     return multiply(firstNumber, secondNumber);
                 }
                 if (operator === '÷'){
+                    if (secondNumber === '0'){
+                        return '🤨';
+                    }
                     return divide(firstNumber, secondNumber);
                 }
             }
