@@ -31,6 +31,8 @@ function deleteDigit(){
 
 function populateDisplay() {
 
+    toggleAnimation(this);
+
     if (this.classList.contains('clearBtn')) {
         clearAll();
     }
@@ -135,7 +137,24 @@ function operate(firstNumber, operator, secondNumber) {
     }
 }
 
+function toggleAnimation(button){
+
+    let activeClass = 'activeBtn';
+
+    if (button.classList.contains('backBtn')){
+        activeClass = 'activeBackBtn';
+    }
+
+    button.classList.add(activeClass);
+
+    // Set a timeout to remove the class after the specified duration
+    setTimeout(function () {
+        button.classList.remove(activeClass);
+    }, 120);
+}
+
 const getButton = function getButton(e){
+
     let keyPressed = e.key;
 
     if (keyPressed === '*'){
@@ -153,7 +172,7 @@ const getButton = function getButton(e){
 }
 
 buttons.forEach((button) => button.addEventListener('click', populateDisplay));
-window.addEventListener('keyup', function(e){
+window.addEventListener('keydown', function(e){
     const button = getButton(e);
     if (button){
         populateDisplay.call(button);

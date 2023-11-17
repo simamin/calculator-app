@@ -139,4 +139,5 @@ button:active{
 
 .activeBtn{
     background-color: #7a647e;
+    transition: 0.1s;
 }
