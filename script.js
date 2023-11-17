@@ -157,12 +157,9 @@ const getButton = function getButton(e){
 
     let keyPressed = e.key;
 
-    console.log(e.key);
-
     if (keyPressed === 'Escape'){
         keyPressed = 'AC';
     }
-
     if (keyPressed === '*'){
         keyPressed = 'x';
     } 
