@@ -2,7 +2,7 @@ let result = 0;
 let firstNumber = 0;
 let secondNumber = 0;
 let currentOperator;
-let lastBtnPressed;
+let lastBtnPressed = 'numberBtn';
 
 let memory = [];
 
@@ -41,7 +41,7 @@ function populateDisplay() {
         deleteDigit();
     }
     else if (this.classList.contains('numberBtn')) {
-        if (lastBtnPressed === 'operatorBtn' || lastBtnPressed === 'resultBtn') {
+        if (lastBtnPressed.includes('operatorBtn') || lastBtnPressed.includes('resultBtn')) {
             display.textContent = '0';
         }
         if (display.textContent === '0' && this.textContent !== '.' || display.textContent.includes('=') === true) {
@@ -59,14 +59,14 @@ function populateDisplay() {
         secondNumber = display.textContent;
     }
     else if (this.classList.contains('operatorBtn')) {
-        if (lastBtnPressed === 'operatorBtn') {
+        if (lastBtnPressed.includes('operatorBtn')) {
             return
         }
         memory.push(firstNumber);
         currentOperator = `${this.dataset.action}`;
         memory.push(currentOperator);
         if (currentOperator === '%') {
-            lastBtnPressed === 'percentageBtn';
+            lastBtnPressed.includes('percentageBtn');
             firstNumber = percentage(firstNumber);
             memory.push(firstNumber);
             display.textContent = `${firstNumber}`;
@@ -74,7 +74,7 @@ function populateDisplay() {
         }
     }
     else if (this.classList.contains('resultBtn')) {
-        if (lastBtnPressed === 'resultBtn') {
+        if (lastBtnPressed.includes('resultBtn')) {
             return
         }
         memory.push(secondNumber);
@@ -156,6 +156,12 @@ function toggleAnimation(button){
 const getButton = function getButton(e){
 
     let keyPressed = e.key;
+
+    console.log(e.key);
+
+    if (keyPressed === 'Escape'){
+        keyPressed = 'AC';
+    }
 
     if (keyPressed === '*'){
         keyPressed = 'x';
