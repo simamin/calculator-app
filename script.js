@@ -29,7 +29,7 @@ function deleteDigit(){
     }
 }
 
-const populateDisplay = function populateDisplay() {
+function populateDisplay() {
 
     if (this.classList.contains('clearBtn')) {
         clearAll();
@@ -149,8 +149,13 @@ const getButton = function getButton(e){
     }
 
     const buttonPressed = document.querySelector(`[data-key="${keyPressed}"]`);
-    return buttonPressed.populateDisplay;
+    return buttonPressed;
 }
 
 buttons.forEach((button) => button.addEventListener('click', populateDisplay));
-window.addEventListener('keyup', getButton);
+window.addEventListener('keyup', function(e){
+    const button = getButton(e);
+    if (button){
+        populateDisplay.call(button);
+    }
+});

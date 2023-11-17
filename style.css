@@ -97,6 +97,11 @@ body{
     background-color: inherit;
 }
 
+.activeBackBtn{
+    color: #7a647e;
+    background-color: inherit
+}
+
 .numberBtn, .operatorBtn{
     flex: 1;
     flex-basis: 25%;
@@ -129,5 +134,9 @@ button{
 }
 
 button:active{
+    background-color: #7a647e;
+}
+
+.activeBtn{
     background-color: #7a647e;
 }
